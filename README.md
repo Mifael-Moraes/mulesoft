@@ -17,20 +17,26 @@ of one initial scenario:
 A single web service endpoint returning an Order by Id with the return payload being an Order
 containing information from the child tables:
 
-Orders
-  OrderID
-  PlacementDate
+Orders:
+  {
+  OrderID,
+  PlacementDate,
   CustomerName
+  }
 
 OrderItems
-  OrderItemId
-  OrderID
-  ItemId
+  {
+  OrderItemId,
+  OrderID,
+  ItemId,
   ItemCount
+  }
 
 Items
-  ItemId
-  ItemName
+  {
+  ItemId,
+  ItemName,
   ItemCost
+  }
 
 
