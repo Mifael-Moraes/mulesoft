@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<global-property doc:name="Global Property" doc:id="89e7b282-5892-49e1-b82c-28b879124cc7" name="mule.env" value="dev" />
+	<configuration-properties doc:name="Configuration properties" doc:id="b147de47-7d9b-4c6c-b661-86c80e96166f" file="properties/${mule.env}-properties.yaml" />
+	
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="5087f3df-f260-4e21-9e7d-016a8a6b440f" >
+		<db:my-sql-connection host="pocerp.caaeblfwbvgk.us-east-1.rds.amazonaws.com" port="3306" user="pocerp" password="senhaNova2021" database="mysql_pocERP" >
+			<db:connection-properties >
+				<db:connection-property key="useSSL" value="true" />
+				<db:connection-property key="verifyServerCertificate" value="false" />
+				<db:connection-property key="requireSSL" value="true" />
+			</db:connection-properties>
+		</db:my-sql-connection>
+	</db:config>
+	<validation:config name="Validation_Config" doc:name="Validation Config" doc:id="a7d1941c-3751-4b1c-bc3c-c405be09b2df" />
+	<http:listener-config name="HTTP_Listener_config">
+        <http:listener-connection host="0.0.0.0" port="${http.port}" />
+    </http:listener-config>
+    <apikit:config name="apikit-config" api="resource::1f2bf9eb-d779-441c-905a-e314e184eaae:poc-erp:1.0.0:raml:zip:poc-erp.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" >
+		<apikit:flow-mappings >
+			<apikit:flow-mapping resource="/orders/{id}" action="get" flow-ref="get:\orders\(id):poc-erp-config" />
+		</apikit:flow-mappings>
+	</apikit:config>
+	<api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="bb6269bd-2f51-4e9d-8c3d-de03342a917f" flowRef="poc-erp-main" />
+</mule>

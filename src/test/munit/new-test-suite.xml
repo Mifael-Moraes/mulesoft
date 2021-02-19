@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="new-test-suite.xml" />
+	<munit:test name="new-test-suite-get:\orders\(id):poc-erp-configTest" doc:id="f3391440-37dc-464f-9dca-bb9146d31766" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="8bd42ec4-3a21-417b-ba15-1eabcf3a0344" processor="set-variable">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="ef112df9-5c05-42a9-92ae-2e1c15f226ac" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:variables >
+						<munit-tools:variable key="orderID" value='#[2]' encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\orders\(id):poc-erp-config" doc:id="bd2f8860-391d-41d7-98ce-01c368fb59ec" name="get:\orders\(id):poc-erp-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="5e5e5d66-a05b-4a4f-8506-0cd1ed6e8d31" actual="#[payload]" expected='#[{&#10;    "OrderId": 2,&#10;    "Name": "Godofredo",&#10;    "Order-Date": "2021-01-02T00:00:00",&#10;    "Items": [&#10;        {&#10;            "ItemID": 3,&#10;            "Item-Name": "FORD-F150",&#10;            "Cost": 45450,&#10;            "Count": 1&#10;        },&#10;        {&#10;            "ItemID": 3,&#10;            "Item-Name": "FORD-F150",&#10;            "Cost": 45450,&#10;            "Count": 1&#10;        },&#10;        {&#10;            "ItemID": 2,&#10;            "Item-Name": "Mit-Lancer",&#10;            "Cost": 12545,&#10;            "Count": 5&#10;        },&#10;        {&#10;            "ItemID": 2,&#10;            "Item-Name": "Mit-Lancer",&#10;            "Cost": 12545,&#10;            "Count": 5&#10;        }&#10;    ]&#10;}]' message='#["Not good!"]'/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="new-test-suiteTest" doc:id="f2b7aead-35c2-4606-a6b3-73a501e1b993" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="0c6179c2-dbe5-4074-b41d-85fb75805267" processor="set-variable">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="ef112df9-5c05-42a9-92ae-2e1c15f226ac" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:variables >
+						<munit-tools:variable key="orderID" value="#[999]" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" doc:id="039d4aad-d8f5-418a-b1ee-09b9a8800bee" name="get:\orders\(id):poc-erp-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="815e01a7-09c3-4387-bdef-b1a8eee0d9f9" actual="#[payload]" expected='#[{&#10;    "message": "No orders found!"&#10;}]' message='#["not good too"]'/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
