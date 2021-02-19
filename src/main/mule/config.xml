@@ -15,7 +15,7 @@ http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/m
 	<configuration-properties doc:name="Configuration properties" doc:id="b147de47-7d9b-4c6c-b661-86c80e96166f" file="properties/${mule.env}-properties.yaml" />
 	
 	<db:config name="Database_Config" doc:name="Database Config" doc:id="5087f3df-f260-4e21-9e7d-016a8a6b440f" >
-		<db:my-sql-connection host="pocerp.caaeblfwbvgk.us-east-1.rds.amazonaws.com" port="3306" user="pocerp" password="senhaNova2021" database="mysql_pocERP" >
+		<db:my-sql-connection host="${database.host}" port="${database.port}" user="${database.user}" password="${database.password}" database="${database.database}" >
 			<db:connection-properties >
 				<db:connection-property key="useSSL" value="true" />
 				<db:connection-property key="verifyServerCertificate" value="false" />

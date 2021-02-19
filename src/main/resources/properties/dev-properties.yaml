@@ -2,3 +2,10 @@ http:
   port: "8081"
 api:
   id: "16642001"
+  
+database:
+  host: "pocerp.caaeblfwbvgk.us-east-1.rds.amazonaws.com" 
+  port: "3306" 
+  user: "pocerp" 
+  password: "" 
+  database: "mysql_pocERP"

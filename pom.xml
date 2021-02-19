@@ -42,7 +42,8 @@
         <anypoint.platform.analytics_base_uri>https://analytics-ingest.anypoint.mulesoft.com/</anypoint.platform.analytics_base_uri>
         <anypoint.platform.client_id>e7bb4af310324c169b16dea3cc97408c</anypoint.platform.client_id>
         <anypoint.platform.client_secret>1cDcF5a95bE8489a959cf6ebCe5fD669</anypoint.platform.client_secret>
-        <anypoint.platform.base_uri>https://anypoint.mulesoft.com/</anypoint.platform.base_uri> 	
+        <anypoint.platform.base_uri>https://anypoint.mulesoft.com/</anypoint.platform.base_uri>
+        <database.password>${db.pass}</database.password> 	
       </properties>
     </cloudHubDeployment>
    
